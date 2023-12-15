@@ -6,7 +6,7 @@
     android:id="@+id/listFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ie.wit.map.ui.report.ListFragment">
+    tools:context="ie.wit.map.ui.list.ListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

@@ -40,7 +40,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
                 android:layout_toEndOf="@+id/imageIcon"
-                android:text="@{place.paymentmethod}"
+                android:text="@{place.rating}"
                 android:textSize="24sp"
                 tools:text="€1000" />
 
@@ -52,7 +52,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="15dp"
                 android:layout_toEndOf="@+id/paymentmethod"
-                android:text="@{place.amount}"
+                android:text="@{place.country}"
                 android:textSize="24sp" />
 
         </RelativeLayout>

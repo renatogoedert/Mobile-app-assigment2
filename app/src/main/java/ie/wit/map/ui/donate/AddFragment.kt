@@ -15,7 +15,7 @@ import androidx.navigation.ui.NavigationUI
 import ie.wit.map.R
 import ie.wit.map.databinding.FragmentAddPlaceBinding
 import ie.wit.map.models.PlaceModel
-import ie.wit.map.ui.report.ListViewModel
+import ie.wit.map.ui.list.ListViewModel
 
 class AddFragment : Fragment() {
 
@@ -105,7 +105,7 @@ class AddFragment : Fragment() {
                 totalDonated += 10
                 layout.totalSoFar.text = getString(R.string.totalSoFar,totalDonated)
                 layout.progressBar.progress = totalDonated
-                addViewModel.addPlace(PlaceModel(paymentmethod = paymentmethod,amount = selectedCountry))
+                addViewModel.addPlace(PlaceModel(rating = paymentmethod,country = selectedCountry))
            // }
         }
     }

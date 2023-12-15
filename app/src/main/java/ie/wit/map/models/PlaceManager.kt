@@ -16,13 +16,13 @@ object PlaceManager : PlaceStore {
         return places
     }
 
-    override fun findById(id:Long) : PlaceModel? {
-        val foundPlace: PlaceModel? = places.find { it.id == id }
+    override fun findById(id:String) : PlaceModel? {
+        val foundPlace: PlaceModel? = places.find { it.uid == id }
         return foundPlace
     }
 
     override fun create(place: PlaceModel) {
-        place.id = getId()
+        place.uid = getId().toString()
         places.add(place)
         logAll()
     }
@@ -30,5 +30,13 @@ object PlaceManager : PlaceStore {
     fun logAll() {
         Timber.v("** Place List **")
         places.forEach { Timber.v("Place ${it}") }
+    }
+
+    override fun delete(id: String) {
+        val placeToRemove = places.find { it.uid == id }
+        placeToRemove?.let {
+            places.remove(it)
+            logAll()
+        }
     }
 }
