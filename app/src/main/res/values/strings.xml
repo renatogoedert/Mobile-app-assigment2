@@ -25,7 +25,6 @@
     <string name="nav_header_desc">Navigation header</string>
 
     <string name="action_about">About Us</string>
-    <string name="aboutus_title">Homer for President !!</string>
     <string name="aboutus_message">Hi, It\'s your Map App\n\nTravel and Add Place to your App\n\n Live it Full</string>
 
     <string name="donationsNotFound">No Places Yet…\nGo Make a Trip!</string>
@@ -36,4 +35,6 @@
     <string name="payment">Payment :</string>
     <string name="message">Message :</string>
     <string name="upvotes">UpVotes :</string>
+
+    <string name="messageLoading">Loading...</string>
 </resources>

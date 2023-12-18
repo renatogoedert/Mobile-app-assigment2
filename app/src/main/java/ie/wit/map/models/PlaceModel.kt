@@ -5,6 +5,6 @@ import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
-data class PlaceModel(var id: Long = 0,
-                      val paymentmethod: String = "N/A",
-                      val amount: String = "N/A") : Parcelable
+data class PlaceModel(var uid: String = "N/A",
+                      val rating: String = "N/A",
+                      val country: String = "N/A") : Parcelable

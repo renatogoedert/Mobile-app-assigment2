@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/listFragment"
-        android:name="ie.wit.map.ui.report.ListFragment"
+        android:name="ie.wit.map.ui.list.ListFragment"
         android:label="@string/action_report"
         tools:layout="@layout/fragment_list_place" >
         <action
@@ -46,7 +46,7 @@
             android:id="@+id/action_donationDetailFragment_to_reportFragment"
             app:destination="@id/listFragment" />
         <argument
-            android:name="donationid"
-            app:argType="long" />
+            android:name="placeid"
+            app:argType="string" />
     </fragment>
 </navigation>
