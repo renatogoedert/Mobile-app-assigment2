@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/addFragment"
-        android:name="ie.wit.map.ui.donate.AddFragment"
+        android:name="ie.wit.map.ui.place.AddFragment"
         android:label="@string/action_donate"
         tools:layout="@layout/fragment_add_place" >
         <action
@@ -22,14 +22,14 @@
         android:label="@string/action_report"
         tools:layout="@layout/fragment_list_place" >
         <action
-            android:id="@+id/action_reportFragment_to_donateFragment"
+            android:id="@+id/action_listFragment_to_placeFragment"
             app:destination="@id/addFragment"
             app:popUpTo="@id/main_navigation"
             app:popUpToInclusive="true"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
         <action
-            android:id="@+id/action_reportFragment_to_donationDetailFragment"
+            android:id="@+id/action_listFragment_to_placeDetailFragment"
             app:destination="@id/placeDetailFragment" />
     </fragment>
     <fragment
@@ -43,7 +43,7 @@
         android:label="Donation Detail"
         tools:layout="@layout/fragment_place_detail" >
         <action
-            android:id="@+id/action_donationDetailFragment_to_reportFragment"
+            android:id="@+id/action_placeDetailFragment_to_listFragment"
             app:destination="@id/listFragment" />
         <argument
             android:name="placeid"

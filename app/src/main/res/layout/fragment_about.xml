@@ -5,7 +5,7 @@
     android:id="@+id/aboutFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F7F8"
+    android:background="@color/gif_background"
     tools:context="ie.wit.map.ui.about.AboutFragment">
 
 

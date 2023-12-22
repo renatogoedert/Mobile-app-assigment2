@@ -5,7 +5,7 @@
     android:id="@+id/addFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ie.wit.map.ui.donate.AddFragment">
+    tools:context="ie.wit.map.ui.place.AddFragment">
 
     <TextView
         android:id="@+id/donateTitle"
