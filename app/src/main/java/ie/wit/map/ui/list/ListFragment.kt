@@ -22,6 +22,7 @@ import ie.wit.map.databinding.FragmentListPlaceBinding
 import ie.wit.map.main.MapApp
 import ie.wit.map.models.PlaceModel
 import ie.wit.map.utils.SwipeToDeleteCallback
+import ie.wit.map.utils.SwipeToPhotoCallback
 import ie.wit.map.utils.createLoader
 import ie.wit.map.utils.hideLoader
 import ie.wit.map.utils.showLoader
@@ -59,7 +60,7 @@ class ListFragment : Fragment(), PlaceClickListener {
         })
 
         fragBinding.fab.setOnClickListener {
-            val action = ListFragmentDirections.actionReportFragmentToDonateFragment()
+            val action = ListFragmentDirections.actionListFragmentToPlaceFragment()
             findNavController().navigate(action)
         }
 
@@ -76,6 +77,14 @@ class ListFragment : Fragment(), PlaceClickListener {
         }
         val itemTouchDeleteHelper = ItemTouchHelper(swipeDeleteHandler)
         itemTouchDeleteHelper.attachToRecyclerView(fragBinding.recyclerView)
+
+        val swipeEditHandler = object : SwipeToPhotoCallback(requireContext()) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                onPlaceClick(viewHolder.itemView.tag as PlaceModel)
+            }
+        }
+        val itemTouchEditHelper = ItemTouchHelper(swipeEditHandler)
+        itemTouchEditHelper.attachToRecyclerView(fragBinding.recyclerView)
 
         return root
     }
@@ -110,14 +119,14 @@ class ListFragment : Fragment(), PlaceClickListener {
     }
 
     override fun onPlaceClick(place: PlaceModel) {
-        val action = ListFragmentDirections.actionReportFragmentToDonationDetailFragment(place.uid)
+        val action = ListFragmentDirections.actionListFragmentToPlaceDetailFragment(place.uid)
         findNavController().navigate(action)
     }
 
     fun setSwipeRefresh() {
         fragBinding.swiperefresh.setOnRefreshListener {
             fragBinding.swiperefresh.isRefreshing = true
-            showLoader(loader,"Downloading Donations")
+            showLoader(loader,"Downloading Places")
             reportViewModel.load()
         }
     }
