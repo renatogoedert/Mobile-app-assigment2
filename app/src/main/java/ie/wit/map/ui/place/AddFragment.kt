@@ -1,4 +1,4 @@
-package ie.wit.map.ui.donate
+package ie.wit.map.ui.place
 
 import android.os.Bundle
 import android.widget.ArrayAdapter

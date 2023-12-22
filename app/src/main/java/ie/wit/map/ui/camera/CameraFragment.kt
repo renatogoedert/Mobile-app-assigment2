@@ -1,4 +1,4 @@
-package ie.wit.map.ui.detail
+package ie.wit.map.ui.camera
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,21 +9,21 @@ import android.widget.Toast
 import androidx.navigation.fragment.navArgs
 import ie.wit.map.R
 
-class PlaceDetailFragment : Fragment() {
+class CameraFragment : Fragment() {
 
     companion object {
-        fun newInstance() = PlaceDetailFragment()
+        fun newInstance() = CameraFragment()
     }
 
-    private lateinit var viewModel: PlaceDetailViewModel
-    private val args by navArgs<PlaceDetailFragmentArgs>()
+    private lateinit var viewModel: CameraViewModel
+    private val args by navArgs<CameraFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_place_detail, container, false)
+        val view = inflater.inflate(R.layout.fragment_camera, container, false)
 
 
         Toast.makeText(context,"Place ID Selected : ${args. placeid}",Toast.LENGTH_LONG).show()

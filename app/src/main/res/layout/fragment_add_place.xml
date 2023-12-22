@@ -5,7 +5,7 @@
     android:id="@+id/addFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ie.wit.map.ui.donate.AddFragment">
+    tools:context="ie.wit.map.ui.place.AddFragment">
 
     <TextView
         android:id="@+id/donateTitle"
@@ -143,23 +143,6 @@
         app:layout_constraintVertical_bias="0.7" />
 
     <TextView
-        android:id="@+id/amount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/amount"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.081"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.778" />
-
-    <TextView
         android:id="@+id/total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -193,23 +176,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.902" />
 
-    <EditText
-        android:id="@+id/paymentAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:autofillHints="Please Enter an Amount"
-        android:ems="10"
-        android:hint="@string/enter_amount"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.888"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.781" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
