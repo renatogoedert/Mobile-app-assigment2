@@ -26,7 +26,7 @@ class PlaceDetailFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_place_detail, container, false)
 
 
-        Toast.makeText(context,"Place ID Selected : ${args.donationid}",Toast.LENGTH_LONG).show()
+        Toast.makeText(context,"Place ID Selected : ${args. placeid}",Toast.LENGTH_LONG).show()
 
         return view
     }
