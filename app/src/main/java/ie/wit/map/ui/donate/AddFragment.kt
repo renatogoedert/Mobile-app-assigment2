@@ -118,7 +118,7 @@ class AddFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         val reportViewModel = ViewModelProvider(this).get(ListViewModel::class.java)
-        reportViewModel.observableDonationsList.observe(viewLifecycleOwner, Observer {
+        reportViewModel.observablePlacesList.observe(viewLifecycleOwner, Observer {
                 totalDonated = 100
                     //reportViewModel.observableDonationsList.value!!.sumOf { it.amount }
         })
