@@ -104,9 +104,6 @@ class AddFragment : Fragment() {
                 R.id.star2 -> "2"
                 else -> "1"
             }
-                totalDonated += 10
-                layout.totalSoFar.text = getString(R.string.totalSoFar,totalDonated)
-                layout.progressBar.progress = totalDonated
                 addViewModel.addPlace(loggedInViewModel.liveFirebaseUser,
                     PlaceModel(rating = rating,country = country,
                         email = loggedInViewModel.liveFirebaseUser.value?.email!!))
@@ -124,10 +121,8 @@ class AddFragment : Fragment() {
         super.onResume()
         val reportViewModel = ViewModelProvider(this).get(ListViewModel::class.java)
         reportViewModel.observablePlacesList.observe(viewLifecycleOwner, Observer {
-                totalDonated = 100
                     //reportViewModel.observableDonationsList.value!!.sumOf { it.amount }
         })
         fragBinding.progressBar.progress = totalDonated
-        fragBinding.totalSoFar.text = getString(R.string.totalSoFar,totalDonated)
     }
 }

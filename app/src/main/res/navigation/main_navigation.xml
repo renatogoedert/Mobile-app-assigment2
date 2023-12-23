@@ -29,8 +29,8 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
         <action
-            android:id="@+id/action_listFragment_to_placeDetailFragment"
-            app:destination="@id/placeDetailFragment" />
+            android:id="@+id/action_listFragment_to_cameraFragment"
+            app:destination="@id/CameraFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
@@ -38,10 +38,10 @@
         android:label="@string/action_about"
         tools:layout="@layout/fragment_about" />
     <fragment
-        android:id="@+id/placeDetailFragment"
+        android:id="@+id/CameraFragment"
         android:name="ie.wit.map.ui.camera.CameraFragment"
-        android:label="Donation Detail"
-        tools:layout="@layout/fragment_camera" >
+        android:label="Camera"
+        tools:layout="@layout/fragment_camera">
         <action
             android:id="@+id/action_placeDetailFragment_to_listFragment"
             app:destination="@id/listFragment" />
