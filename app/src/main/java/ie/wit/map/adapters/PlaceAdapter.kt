@@ -38,6 +38,7 @@ class PlaceAdapter(private var places: MutableList<PlaceModel>,
 
         fun bind(place: PlaceModel, listener: PlaceClickListener) {
             binding.place = place
+            binding.root.tag = place
             binding.imageIcon.setImageResource(R.mipmap.ic_launcher_round)
             binding.root.setOnClickListener { listener.onPlaceClick(place) }
             binding.executePendingBindings()
