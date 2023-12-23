@@ -107,4 +107,25 @@ object FirebaseDBManager : PlaceStore {
 
         database.updateChildren(childUpdate)
     }
+
+    fun updateImageRef(userid: String,imageUri: String) {
+
+        val userPlaces = database.child("user-places").child(userid)
+        val allPlaces = database.child("places")
+
+        userPlaces.addListenerForSingleValueEvent(
+            object : ValueEventListener {
+                override fun onCancelled(error: DatabaseError) {}
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    snapshot.children.forEach {
+                        //Update Users imageUri
+                        it.ref.child("profilepic").setValue(imageUri)
+                        //Update all donations that match 'it'
+                        val place = it.getValue(PlaceModel::class.java)
+                        allPlaces.child(place!!.uid!!)
+                            .child("profilepic").setValue(imageUri)
+                    }
+                }
+            })
+    }
 }

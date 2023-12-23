@@ -9,6 +9,7 @@ import kotlinx.parcelize.Parcelize
 data class PlaceModel(var uid: String = "N/A",
                       val rating: String = "N/A",
                       val country: String = "N/A",
+                      var profilepic: String = "",
                       val email: String = "joe@bloggs.com") : Parcelable
 {
     @Exclude
@@ -17,6 +18,7 @@ data class PlaceModel(var uid: String = "N/A",
             "uid" to uid,
             "rating" to rating,
             "country" to country,
+            "profilepic" to profilepic,
             "email" to email
         )
     }
