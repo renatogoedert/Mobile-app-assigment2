@@ -10,6 +10,7 @@ data class PlaceModel(var uid: String = "N/A",
                       val rating: String = "N/A",
                       val country: String = "N/A",
                       var profilepic: String = "",
+                      var isfav: Boolean? = false,
                       val email: String = "joe@bloggs.com") : Parcelable
 {
     @Exclude
@@ -19,6 +20,7 @@ data class PlaceModel(var uid: String = "N/A",
             "rating" to rating,
             "country" to country,
             "profilepic" to profilepic,
+            "isfav" to isfav,
             "email" to email
         )
     }
