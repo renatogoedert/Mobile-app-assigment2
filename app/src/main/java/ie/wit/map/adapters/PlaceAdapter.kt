@@ -11,8 +11,8 @@ interface PlaceClickListener {
     fun onPlaceClick(place: PlaceModel)
 }
 
-class PlaceAdapter constructor(private var places: List<PlaceModel>,
-                                  private val listener: PlaceClickListener)
+class PlaceAdapter(private var places: MutableList<PlaceModel>,
+                   private val listener: PlaceClickListener)
     : RecyclerView.Adapter<PlaceAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
@@ -29,10 +29,16 @@ class PlaceAdapter constructor(private var places: List<PlaceModel>,
 
     override fun getItemCount(): Int = places.size
 
+    fun removeAt(position: Int) {
+        places.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
     inner class MainHolder(val binding : CardPlaceBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(place: PlaceModel, listener: PlaceClickListener) {
             binding.place = place
+            binding.root.tag = place
             binding.imageIcon.setImageResource(R.mipmap.ic_launcher_round)
             binding.root.setOnClickListener { listener.onPlaceClick(place) }
             binding.executePendingBindings()
