@@ -3,7 +3,9 @@ package ie.wit.map.ui.place
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ie.wit.map.models.PlaceManager
+import com.google.firebase.auth.FirebaseUser
+import ie.wit.map.firebase.FirebaseDBManager
+//import ie.wit.map.models.PlaceManager
 import ie.wit.map.models.PlaceModel
 
 class AddViewModel : ViewModel() {
@@ -13,9 +15,12 @@ class AddViewModel : ViewModel() {
     val observableStatus: LiveData<Boolean>
         get() = status
 
-    fun addPlace(place: PlaceModel) {
+    fun addPlace(firebaseUser: MutableLiveData<FirebaseUser>,
+                 place: PlaceModel) {
         status.value = try {
-            PlaceManager.create(place)
+            //DonationManager.create(donation)
+            FirebaseDBManager.create(firebaseUser,place)
+
             true
         } catch (e: IllegalArgumentException) {
             false

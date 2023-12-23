@@ -3,10 +3,12 @@ package ie.wit.map.ui.auth
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import ie.wit.map.R
 import ie.wit.map.databinding.LoginBinding
 import ie.wit.map.ui.home.Home
@@ -30,6 +32,16 @@ class Login : AppCompatActivity() {
             createAccount(loginBinding.fieldEmail.text.toString(),
                     loginBinding.fieldPassword.text.toString())
         }
+
+
+        // Reference the ImageView
+        val imageViewGif: ImageView = loginBinding.root.findViewById(R.id.imageViewGif)
+
+        // Load the GIF using Glide (replace R.drawable.your_gif_resource_name with the actual resource ID)
+        Glide.with(this)
+            .load(R.drawable.globe_gif)
+            .into(imageViewGif)
+
     }
 
     public override fun onStart() {
