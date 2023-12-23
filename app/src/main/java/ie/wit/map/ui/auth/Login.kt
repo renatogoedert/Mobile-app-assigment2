@@ -33,6 +33,7 @@ class Login : AppCompatActivity() {
                     loginBinding.fieldPassword.text.toString())
         }
 
+
         // Reference the ImageView
         val imageViewGif: ImageView = loginBinding.root.findViewById(R.id.imageViewGif)
 
@@ -40,6 +41,7 @@ class Login : AppCompatActivity() {
         Glide.with(this)
             .load(R.drawable.globe_gif)
             .into(imageViewGif)
+
     }
 
     public override fun onStart() {

@@ -29,6 +29,7 @@ class AddFragment : Fragment() {
     private lateinit var addViewModel: AddViewModel
     private val loggedInViewModel : LoggedInViewModel by activityViewModels()
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         _fragBinding = FragmentAddPlaceBinding.inflate(inflater, container, false)
@@ -98,6 +99,7 @@ class AddFragment : Fragment() {
         layout.donateButton.setOnClickListener {
             val country = layout.countrySpinner.selectedItem as String
             val rating = when (layout.paymentMethod.checkedRadioButtonId) {
+
                 R.id.star3 -> "3"
                 R.id.star2 -> "2"
                 else -> "1"
@@ -108,6 +110,7 @@ class AddFragment : Fragment() {
                 addViewModel.addPlace(loggedInViewModel.liveFirebaseUser,
                     PlaceModel(rating = rating,country = country,
                         email = loggedInViewModel.liveFirebaseUser.value?.email!!))
+
            // }
         }
     }

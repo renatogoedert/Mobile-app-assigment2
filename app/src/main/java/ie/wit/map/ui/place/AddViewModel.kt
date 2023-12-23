@@ -20,6 +20,7 @@ class AddViewModel : ViewModel() {
         status.value = try {
             //DonationManager.create(donation)
             FirebaseDBManager.create(firebaseUser,place)
+
             true
         } catch (e: IllegalArgumentException) {
             false
