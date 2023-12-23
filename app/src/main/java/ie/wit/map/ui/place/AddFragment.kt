@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +16,7 @@ import androidx.navigation.ui.NavigationUI
 import ie.wit.map.R
 import ie.wit.map.databinding.FragmentAddPlaceBinding
 import ie.wit.map.models.PlaceModel
+import ie.wit.map.ui.auth.LoggedInViewModel
 import ie.wit.map.ui.list.ListViewModel
 
 class AddFragment : Fragment() {
@@ -25,6 +27,8 @@ class AddFragment : Fragment() {
     private val fragBinding get() = _fragBinding!!
     //lateinit var navController: NavController
     private lateinit var addViewModel: AddViewModel
+    private val loggedInViewModel : LoggedInViewModel by activityViewModels()
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -93,19 +97,17 @@ class AddFragment : Fragment() {
 
     fun setButtonListener(layout: FragmentAddPlaceBinding) {
         layout.donateButton.setOnClickListener {
-            val selectedCountry = layout.countrySpinner.selectedItem as String
-            //if(totalDonated >= layout.progressBar.max)
-            //    Toast.makeText(context,"Donate Amount Exceeded!", Toast.LENGTH_LONG).show()
-            //else {
-            val paymentmethod = when (layout.paymentMethod.checkedRadioButtonId) {
+            val country = layout.countrySpinner.selectedItem as String
+            val rating = when (layout.paymentMethod.checkedRadioButtonId) {
+
                 R.id.star3 -> "3"
                 R.id.star2 -> "2"
                 else -> "1"
             }
-                totalDonated += 10
-                layout.totalSoFar.text = getString(R.string.totalSoFar,totalDonated)
-                layout.progressBar.progress = totalDonated
-                addViewModel.addPlace(PlaceModel(rating = paymentmethod,country = selectedCountry))
+                addViewModel.addPlace(loggedInViewModel.liveFirebaseUser,
+                    PlaceModel(rating = rating,country = country,
+                        email = loggedInViewModel.liveFirebaseUser.value?.email!!))
+
            // }
         }
     }
@@ -119,10 +121,8 @@ class AddFragment : Fragment() {
         super.onResume()
         val reportViewModel = ViewModelProvider(this).get(ListViewModel::class.java)
         reportViewModel.observablePlacesList.observe(viewLifecycleOwner, Observer {
-                totalDonated = 100
                     //reportViewModel.observableDonationsList.value!!.sumOf { it.amount }
         })
         fragBinding.progressBar.progress = totalDonated
-        fragBinding.totalSoFar.text = getString(R.string.totalSoFar,totalDonated)
     }
 }

@@ -25,9 +25,6 @@ class CameraFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_camera, container, false)
 
-
-        Toast.makeText(context,"Place ID Selected : ${args. placeid}",Toast.LENGTH_LONG).show()
-
         return view
     }
 

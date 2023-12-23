@@ -3,36 +3,43 @@ package ie.wit.map.ui.list
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
+import android.widget.ImageView
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import ie.wit.map.R
 import ie.wit.map.adapters.PlaceAdapter
 import ie.wit.map.adapters.PlaceClickListener
 import ie.wit.map.databinding.FragmentListPlaceBinding
+import ie.wit.map.firebase.FirebaseDBManager
 import ie.wit.map.main.MapApp
 import ie.wit.map.models.PlaceModel
+import ie.wit.map.ui.auth.LoggedInViewModel
 import ie.wit.map.utils.SwipeToDeleteCallback
 import ie.wit.map.utils.SwipeToPhotoCallback
 import ie.wit.map.utils.createLoader
 import ie.wit.map.utils.hideLoader
 import ie.wit.map.utils.showLoader
 
+
 class ListFragment : Fragment(), PlaceClickListener {
 
     lateinit var app: MapApp
     private var _fragBinding: FragmentListPlaceBinding? = null
     private val fragBinding get() = _fragBinding!!
-    private lateinit var reportViewModel: ListViewModel
+    private val reportViewModel: ListViewModel by activityViewModels()
+    private val loggedInViewModel : LoggedInViewModel by activityViewModels()
     lateinit var loader : AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,10 +52,10 @@ class ListFragment : Fragment(), PlaceClickListener {
     ): View? {
         _fragBinding = FragmentListPlaceBinding.inflate(inflater, container, false)
         val root = fragBinding.root
-        loader = createLoader(requireActivity())
 	setupMenu()
+        loader = createLoader(requireActivity())
+
         fragBinding.recyclerView.layoutManager = LinearLayoutManager(activity)
-        reportViewModel = ViewModelProvider(this).get(ListViewModel::class.java)
         showLoader(loader,"Downloading Places")
         reportViewModel.observablePlacesList.observe(viewLifecycleOwner, Observer {
                 places ->
@@ -66,12 +73,18 @@ class ListFragment : Fragment(), PlaceClickListener {
 
         setSwipeRefresh()
 
+
         val swipeDeleteHandler = object : SwipeToDeleteCallback(requireContext()) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 showLoader(loader,"Deleting Place")
                 val adapter = fragBinding.recyclerView.adapter as PlaceAdapter
                 adapter.removeAt(viewHolder.adapterPosition)
-                //reportViewModel.delete(viewHolder.itemView.tag as String)
+                val user = Firebase.auth.currentUser?.uid
+                if (user != null) {
+                    reportViewModel.delete(user,
+                        (viewHolder.itemView.tag as PlaceModel).uid!!)
+                }
+
                 hideLoader(loader)
             }
         }
@@ -80,11 +93,14 @@ class ListFragment : Fragment(), PlaceClickListener {
 
         val swipeEditHandler = object : SwipeToPhotoCallback(requireContext()) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                onPlaceClick(viewHolder.itemView.tag as PlaceModel)
+                val action = ListFragmentDirections.actionListFragmentToCameraFragment("")
+                findNavController().navigate(action)
+
             }
         }
         val itemTouchEditHelper = ItemTouchHelper(swipeEditHandler)
         itemTouchEditHelper.attachToRecyclerView(fragBinding.recyclerView)
+
 
         return root
     }
@@ -119,8 +135,12 @@ class ListFragment : Fragment(), PlaceClickListener {
     }
 
     override fun onPlaceClick(place: PlaceModel) {
-        val action = ListFragmentDirections.actionListFragmentToPlaceDetailFragment(place.uid)
-        findNavController().navigate(action)
+        place.isfav = !place.isfav!!
+
+        val user = Firebase.auth.currentUser?.uid
+        if (user != null) {
+            FirebaseDBManager.update(user, place.uid, place)
+        }
     }
 
     fun setSwipeRefresh() {
