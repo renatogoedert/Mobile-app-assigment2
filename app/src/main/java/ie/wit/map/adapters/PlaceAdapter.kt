@@ -3,6 +3,7 @@ package ie.wit.map.adapters
 import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.ViewGroup
+
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
@@ -13,6 +14,7 @@ import ie.wit.map.databinding.CardPlaceBinding
 import ie.wit.map.models.PlaceModel
 import ie.wit.map.utils.customTransformation
 import timber.log.Timber
+
 
 interface PlaceClickListener {
     fun onPlaceClick(place: PlaceModel)
@@ -47,12 +49,14 @@ class PlaceAdapter(private var places: MutableList<PlaceModel>,
             binding.place = place
             binding.root.tag = place
 
+
             val starImageView: ImageView = binding.imagefavourite
             val starColor = if (place.isfav == true) R.color.yellowStar else R.color.grayStar
             starImageView.setColorFilter(
                 ContextCompat.getColor(starImageView.context, starColor),
                 PorterDuff.Mode.SRC_IN
             )
+
 
             Picasso.get().load(place.profilepic.toUri())
                 .resize(200, 200)

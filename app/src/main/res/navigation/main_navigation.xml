@@ -42,6 +42,7 @@
         android:name="ie.wit.map.ui.camera.CameraFragment"
         android:label="Camera"
         tools:layout="@layout/fragment_camera">
+
         <action
             android:id="@+id/action_placeDetailFragment_to_listFragment"
             app:destination="@id/listFragment" />

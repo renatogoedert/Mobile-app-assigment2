@@ -95,6 +95,7 @@ class ListFragment : Fragment(), PlaceClickListener {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val action = ListFragmentDirections.actionListFragmentToCameraFragment("")
                 findNavController().navigate(action)
+
             }
         }
         val itemTouchEditHelper = ItemTouchHelper(swipeEditHandler)
